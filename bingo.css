@@ -1,0 +1,34 @@
+body h1 {
+	text-align: center;
+}
+
+.card {
+	display: table;
+	border-spacing: 5px;
+	margin: auto;
+}
+
+.row {
+	display: table-row;
+}
+
+.space {
+	display: table-cell;
+	position: relative;
+	vertical-align: middle;
+	width: 150px;
+	height: 150px;
+	border: 1px solid black;
+}
+
+.space.selected{
+	background-color: #ff0000;
+}
+
+.text {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
