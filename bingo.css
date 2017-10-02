@@ -1,5 +1,6 @@
 body {
 	text-align: center;
+	background-color: #272822;
 	color: #272822;
 }
 
@@ -7,7 +8,7 @@ body {
 	font-family: "Luckiest Guy", cursive;
 	font-size: 150px;
 	text-align: center;
-	color: #ffffff;
+	color: #F0F7FF;
 }
 
 #zulu_crew {
@@ -24,12 +25,6 @@ body {
 	border-radius: 25px;
 	display: inline-block;
 	padding: 0px 25px 25px 25px;
-	background-color: ;
-}
-
-#bingo_logo {
-	max-width: 100%;
-	max-height: 100%;
 }
 
 .grid {
@@ -48,50 +43,29 @@ body {
 	vertical-align: middle;
 	width: 150px;
 	height: 150px;
-	background-color: white;
+	background-color: #F0F7FF;
 }
 
-.space.selected{
-	background-color: #ff0000;
-}
-
-.text {
+.space > * {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.text {
 	width: 90%;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	text-align: center;
+	z-index: 0;
 }
 
 .chip {
-	width: 100px;
-	height: 100px;
-	background: red;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
-}
-
-
-.black {
-	background-color: #272822;
-}
-
-.pink {
-	background-color: #F92672;
-}
-
-.blue {
-	background-color: #66D9EF;
-}
-
-.green {
-	background-color: #A6E22E;
-}
-
-.orange {
-	background-color: #FD971F;
+	width: 120px;
+	height: 120px;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	z-index: 1;
 }
