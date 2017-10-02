@@ -1,12 +1,12 @@
 var ROWS = 5;
 var COLUMNS = 5;
 
-function init_card(data) {
+function init_grid(data) {
 	var i = 0;
-	var $card = $(".card");
+	var $grid = $(".grid");
 	for (var i = 0, row = 0; row < ROWS; row++) {
 		var $row = $("<div>").addClass("row");
-		$card.append($row);
+		$grid.append($row);
 		for (var column = 0; column < COLUMNS; column++) {
 			var $space = $("<div>").addClass("space").attr("row", row).attr("column", column);
 			var $text = $("<span>").addClass("text").text(data[i]);
@@ -36,8 +36,15 @@ function shuffle(data) {
 	return data
 }
 
+var COLORS = [
+	"#F92672", // pink
+	"#66D9EF", // blue
+	"#A6E22E", // green
+	"#FD971F" // orange
+];
 $(document).ready(function() {
+	$(".bingo_card").css('background-color', COLORS[Math.floor(Math.random() * COLORS.length)])
 	$.getJSON("data.json", function(data) {
-		init_card(shuffle(data));
+		init_grid(shuffle(data));
 	});
 });
