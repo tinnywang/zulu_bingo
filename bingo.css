@@ -1,19 +1,20 @@
 body {
 	text-align: center;
-	background-color: #272822;
+	background-color: #F0F7FF;
 	color: #272822;
 }
 
 #bingo {
 	font-family: "Luckiest Guy", cursive;
 	font-size: 150px;
+	color: #E74C3C;
 	text-align: center;
-	color: #F0F7FF;
 }
 
 #zulu_crew {
 	font-family: "Pacifico", cursive;
 	font-size: 45px;
+	color: #F0F7FF;
 	position: relative;
 	top: -55px;
 	left: 160px;
@@ -25,6 +26,7 @@ body {
 	border-radius: 25px;
 	display: inline-block;
 	padding: 0px 25px 25px 25px;
+	background-color: #272822;
 }
 
 .grid {
@@ -64,8 +66,22 @@ body {
 .chip {
 	width: 120px;
 	height: 120px;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
 	z-index: 1;
+	background-size: 100% 100%;
+}
+
+.awesome_face {
+	background-image: url("images/awesome_face.png");
+}
+
+.doge {
+	background-image: url("images/doge.png");
+}
+
+.ernest {
+	background-image: url("images/ernest.png");
+}
+
+.ernest_2 {
+	background-image: url("images/ernest_2.png");
 }

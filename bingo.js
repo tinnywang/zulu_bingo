@@ -1,12 +1,11 @@
 var ROWS = 5;
 var COLUMNS = 5;
-var COLORS = [
-	"#F92672", // pink
-	"#A37EF2", // purple
-	"#66D9EF", // blue
-	"#A6E22E", // green
-	"#FD971F"  // orange
-];
+var CHIPS = [
+	"awesome_face",
+	"doge",
+	"ernest",
+	"ernest_2"
+]
 
 function init_grid(data) {
 	var i = 0;
@@ -28,7 +27,8 @@ function init_grid(data) {
 
 function on_click() {
 	var $chip = $(".chip", this);
-	set_random_color($chip);
+	var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
+	$chip.addClass(chip_image);
 	$chip.is(":hidden") ? $chip.show() : $chip.hide();
 }
 
@@ -39,16 +39,10 @@ function shuffle(data) {
 		data[i] = data[j]
 		data[j] = temp;
 	}
-	return data
-}
-
-function set_random_color($element) {
-	var color = COLORS[Math.floor(Math.random() * COLORS.length)];
-	$element.css("background-color", color);
+	return data;
 }
 
 $(document).ready(function() {
-	set_random_color($(".bingo_card"));
 	$.getJSON("data.json", function(data) {
 		init_grid(shuffle(data));
 	});
