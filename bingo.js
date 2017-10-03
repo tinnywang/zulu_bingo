@@ -8,20 +8,18 @@ var CHIPS = [
 ]
 
 function init_grid(data) {
-	var i = 0;
 	var $grid = $(".grid");
 	for (var i = 0, row = 0; row < ROWS; row++) {
 		var $row = $("<div>").addClass("row");
 		$grid.append($row);
-		for (var column = 0; column < COLUMNS; column++) {
+		for (var column = 0; column < COLUMNS; column++, i++) {
 			var $space = $("<div>").addClass("space").attr("row", row).attr("column", column);
-			var $text = $("<span>").addClass("text").text(data[i]);
+			var $content = $("<span>").addClass("content").html(data[i]);
 			var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
 			var $chip = $("<div>").addClass("chip " + chip_image).hide();
-			$space.append($text).append($chip);
+			$space.append($content).append($chip);
 			$space.click(on_click);
 			$row.append($space);
-			i++;
 		}
 	}
 }

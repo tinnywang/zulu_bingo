@@ -55,12 +55,17 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-.text {
+.content {
 	width: 90%;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	text-align: center;
 	z-index: 0;
+}
+
+.content img {
+	width: 48px;
+	height: 48px;
 }
 
 .chip {
