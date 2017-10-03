@@ -16,7 +16,8 @@ function init_grid(data) {
 		for (var column = 0; column < COLUMNS; column++) {
 			var $space = $("<div>").addClass("space").attr("row", row).attr("column", column);
 			var $text = $("<span>").addClass("text").text(data[i]);
-			var $chip = $("<div>").addClass("chip").hide();
+			var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
+			var $chip = $("<div>").addClass("chip " + chip_image).hide();
 			$space.append($text).append($chip);
 			$space.click(on_click);
 			$row.append($space);
@@ -27,8 +28,6 @@ function init_grid(data) {
 
 function on_click() {
 	var $chip = $(".chip", this);
-	var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
-	$chip.addClass(chip_image);
 	$chip.is(":hidden") ? $chip.show() : $chip.hide();
 }
 
