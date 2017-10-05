@@ -4,6 +4,18 @@ body {
 	color: #272822;
 }
 
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.center > * {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
 #bingo {
 	font-family: "Luckiest Guy", cursive;
 	font-size: 150px;
