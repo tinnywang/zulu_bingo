@@ -37,7 +37,7 @@ body {
 .bingo_card {
 	border-radius: 25px;
 	display: inline-block;
-	padding: 0px 25px 25px 25px;
+	padding: 25px;
 	background-color: #272822;
 }
 
