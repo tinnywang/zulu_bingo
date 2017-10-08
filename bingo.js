@@ -1,66 +1,80 @@
-var ROWS = 5;
-var COLUMNS = 5;
-var CHIPS = [
-	"awesome_face",
-	"doge",
-	"ernest",
-	"ernest_2"
-]
-var STATE_REGEX = /state=(.+);?/;
-var state = {};
+const ROWS = 5;
+const COLUMNS = 5;
 
-function init_state(data) {
-	var match = document.cookie.match(STATE_REGEX);
-	if (match) {
-		state = JSON.parse(decodeURIComponent(escape(atob(match[1]))));
-	} else {
-		for (var i = 0, row = 0; row < ROWS; row++) {
-			for (var column = 0; column < COLUMNS; column++, i++) {
-				update_state(row, column, true, data[i]);
+function BingoGrid(gameState) {
+	const CHIPS = [
+		"awesome_face",
+		"doge",
+		"ernest",
+		"ernest_2"
+	]
+
+	this.init = function() {
+		var $grid = $(".grid");
+		for (var row = 0; row < ROWS; row++) {
+			var $row = $("<div>").addClass("row");
+			$grid.append($row);
+			for (var column = 0; column < COLUMNS; column++) {
+				var $space = $("<div>").addClass("space").data("row", row).data("column", column);
+				var state = gameState.get(row, column);
+				var $content = $("<span>").addClass("content").html(state.content);
+				var chipImage = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
+				var $chip = $("<div>").addClass("chip " + chipImage);
+				state.hidden ? $chip.hide() : $chip.show();
+				$space.append($content).append($chip);
+				$space.click(onClick);
+				$row.append($space);
 			}
 		}
 	}
+
+	function onClick() {
+		var $chip = $(".chip", this);
+		var isHidden = $chip.is(":hidden");
+		isHidden ? $chip.show() : $chip.hide();
+		var row = $(this).data("row");
+		var column = $(this).data("column");
+		gameState.set(row, column, !isHidden, $(".content", this).html());
+	}
+
+	this.init();
 }
 
-function init_grid() {
-	var $grid = $(".grid");
-	for (var row = 0; row < ROWS; row++) {
-		var $row = $("<div>").addClass("row");
-		$grid.append($row);
-		for (var column = 0; column < COLUMNS; column++) {
-			var $space = $("<div>").addClass("space").data("row", row).data("column", column);
-			var data = state[key(row, column)];
-			var $content = $("<span>").addClass("content").html(data.content);
-			var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
-			var $chip = $("<div>").addClass("chip " + chip_image);
-			data.hidden ? $chip.hide() : $chip.show();
-			$space.append($content).append($chip);
-			$space.click(on_click);
-			$row.append($space);
+function GameState(data) {
+	const REGEX = /state=(.+);?/;
+	this.state = {};
+
+	this.init = function() {
+		var match = document.cookie.match(REGEX);
+		if (match) {
+			this.state = JSON.parse(decodeURIComponent(escape(atob(match[1]))));
+		} else {
+			for (var i = 0, row = 0; row < ROWS; row++) {
+				for (var column = 0; column < COLUMNS; column++, i++) {
+					this.set(row, column, true, data[i]);
+				}
+			}
 		}
 	}
-}
 
-function key(row, column) {
-	return row.toString() + "," + column.toString();
-}
+	this.set = function(row, column, isHidden, content) {
+		this.state[key(row, column)] = value(isHidden, content);
+		document.cookie = "state=" + btoa(unescape(encodeURIComponent(JSON.stringify(this.state))));
+	}
 
-function value(is_hidden, content) {
-	return {"hidden": is_hidden, "content": content};
-}
+	this.get = function(row, column) {
+		return this.state[key(row, column)];
+	}
 
-function update_state(row, column, is_hidden, content) {
-	state[key(row, column)] = value(is_hidden, content);
-	document.cookie = "state=" + btoa(unescape(encodeURIComponent(JSON.stringify(state))));
-}
+	function key(row, column) {
+		return row.toString() + "," + column.toString();
+	}
 
-function on_click() {
-	var row = $(this).data("row");
-	var column = $(this).data("column");
-	var $chip = $(".chip", this);
-	var is_hidden = $chip.is(":hidden");
-	is_hidden ? $chip.show() : $chip.hide();
-	update_state(row, column, !is_hidden, $(".content", this).html());
+	function value(isHidden, content) {
+		return {"hidden": isHidden, "content": content};
+	}
+
+	this.init();
 }
 
 function shuffle(data) {
@@ -75,7 +89,7 @@ function shuffle(data) {
 
 $(document).ready(function() {
 	$.getJSON("data.json", function(data) {
-		init_state(shuffle(data));
-		init_grid();
+		var gameState = new GameState(shuffle(data));
+		new BingoGrid(gameState);
 	});
 });
