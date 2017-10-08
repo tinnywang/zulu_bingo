@@ -9,45 +9,31 @@ var CHIPS = [
 var STATE_REGEX = /state=(.+);?/;
 var state = {};
 
-function init(data, state) {
-	var $grid = $(".grid");
-	for (var i = 0, row = 0; row < ROWS; row++) {
-		var $row = $("<div>").addClass("row");
-		$grid.append($row);
-		for (var column = 0; column < COLUMNS; column++, i++) {
-			var $space = $("<div>").addClass("space").data("row", row).data("column", column);
-			var $content = $("<span>").addClass("content").html(data[i]);
-			var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
-			var $chip = $("<div>").addClass("chip " + chip_image).hide();
-			$space.append($content).append($chip);
-			$space.click(on_click);
-			$row.append($space);
-			update_state(row, column, true, data[i]);
+function init_state(data) {
+	var match = document.cookie.match(STATE_REGEX);
+	if (match) {
+		state = JSON.parse(decodeURIComponent(escape(atob(match[1]))));
+	} else {
+		for (var i = 0, row = 0; row < ROWS; row++) {
+			for (var column = 0; column < COLUMNS; column++, i++) {
+				update_state(row, column, true, data[i]);
+			}
 		}
 	}
 }
 
-function init_state() {
-	var match = document.cookie.match(STATE_REGEX);
-	if (!match) {
-		return false;
-	}
-	state = JSON.parse(decodeURIComponent(escape(atob(match[1]))));
-	return true;
-}
-
-function init_from_cookie() {
+function init_grid() {
 	var $grid = $(".grid");
 	for (var row = 0; row < ROWS; row++) {
 		var $row = $("<div>").addClass("row");
 		$grid.append($row);
 		for (var column = 0; column < COLUMNS; column++) {
 			var $space = $("<div>").addClass("space").data("row", row).data("column", column);
-			var value = state[key(row, column)];
-			var $content = $("<span>").addClass("content").html(value.content);
+			var data = state[key(row, column)];
+			var $content = $("<span>").addClass("content").html(data.content);
 			var chip_image = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
 			var $chip = $("<div>").addClass("chip " + chip_image);
-			value.hidden ? $chip.hide() : $chip.show();
+			data.hidden ? $chip.hide() : $chip.show();
 			$space.append($content).append($chip);
 			$space.click(on_click);
 			$row.append($space);
@@ -88,11 +74,8 @@ function shuffle(data) {
 }
 
 $(document).ready(function() {
-	if (init_state()) {
-		init_from_cookie();
-	} else {
-		$.getJSON("data.json", function(data) {
-			init(shuffle(data), state);
-		});
-	}
+	$.getJSON("data.json", function(data) {
+		init_state(shuffle(data));
+		init_grid();
+	});
 });
