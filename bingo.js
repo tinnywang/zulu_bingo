@@ -10,7 +10,7 @@ function BingoGrid(gameState) {
 	]
 
 	this.init = function() {
-		var $grid = $(".grid");
+		var $grid = $("#grid");
 		for (var row = 0; row < ROWS; row++) {
 			var $row = $("<div>").addClass("row");
 			$grid.append($row);
@@ -91,5 +91,10 @@ $(document).ready(function() {
 	$.getJSON("data.json", function(data) {
 		var gameState = new GameState(shuffle(data));
 		new BingoGrid(gameState);
+	});
+
+	$("#button").click(function() {
+		document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		location.reload();
 	});
 });
