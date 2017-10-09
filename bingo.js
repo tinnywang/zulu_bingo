@@ -41,13 +41,13 @@ function BingoGrid(gameState) {
 }
 
 function GameState(data) {
-	const REGEX = /state=(.+);?/;
+	const REGEX = /(^| )state=([^;]+)/;
 	this.state = {};
 
 	this.init = function() {
 		var match = document.cookie.match(REGEX);
 		if (match) {
-			this.state = JSON.parse(decodeURIComponent(escape(atob(match[1]))));
+			this.state = JSON.parse(decodeURIComponent(escape(atob(match[2]))));
 		} else {
 			for (var i = 0, row = 0; row < ROWS; row++) {
 				for (var column = 0; column < COLUMNS; column++, i++) {
@@ -94,7 +94,7 @@ $(document).ready(function() {
 	});
 
 	$("#button").click(function() {
-		document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie = "state=";
 		location.reload();
 	});
 });
