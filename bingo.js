@@ -1,50 +1,69 @@
 const ROWS = 5;
 const COLUMNS = 5;
 
-function BingoGrid(gameState) {
+function BingoGrid() {
 	const CHIPS = [
 		"awesome_face",
 		"doge",
 		"ernest",
 		"ernest_2"
 	]
+	this.gameState = null;
 
-	this.init = function() {
+	this.__init__ = function() {
 		var $grid = $("#grid");
 		for (var row = 0; row < ROWS; row++) {
 			var $row = $("<div>").addClass("row");
 			$grid.append($row);
 			for (var column = 0; column < COLUMNS; column++) {
 				var $space = $("<div>").addClass("space").data("row", row).data("column", column);
-				var state = gameState.get(row, column);
-				var $content = $("<span>").addClass("content").html(state.content);
+				var $content = $("<span>").addClass("content");
 				var chipImage = CHIPS[(Math.floor(Math.random() * CHIPS.length))];
-				var $chip = $("<div>").addClass("chip " + chipImage);
-				state.hidden ? $chip.hide() : $chip.show();
+				var $chip = $("<div>").addClass("chip " + chipImage).hide();
 				$space.append($content).append($chip);
-				$space.click(onClick);
+				$space.click($.proxy(onClick, this, $space));
 				$row.append($space);
 			}
 		}
 	}
 
-	function onClick() {
-		var $chip = $(".chip", this);
-		var isHidden = $chip.is(":hidden");
-		isHidden ? $chip.show() : $chip.hide();
-		var row = $(this).data("row");
-		var column = $(this).data("column");
-		gameState.set(row, column, !isHidden, $(".content", this).html());
+	this.init = function(data) {
+		this.gameState = new GameState(shuffle(data));
+		var spaces = $(".space");
+		for (var i = 0; i < spaces.length; i++) {
+			var $space = $(spaces[i]);
+			var $chip = $(".chip", $space);
+			var state = this.gameState.get($space.data("row"), $space.data("column"));
+			$(".content", $space).html(state.content);
+			state.hidden ? $chip.hide() : $chip.show();
+		}
 	}
 
-	this.init();
+	function shuffle(data) {
+		for (var i = data.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * i);
+			var temp = data[i];
+			data[i] = data[j]
+			data[j] = temp;
+		}
+		return data;
+	}
+
+	function onClick($space) {
+		var $chip = $(".chip", $space);
+		var isHidden = $chip.is(":hidden");
+		isHidden ? $chip.show() : $chip.hide();
+		this.gameState.set($space.data("row"), $space.data("column"), !isHidden, $(".content", $space).html());
+	}
+
+	this.__init__();
 }
 
 function GameState(data) {
 	const REGEX = /(^| )state=([^;]+)/;
 	this.state = {};
 
-	this.init = function() {
+	this.__init__ = function() {
 		var match = document.cookie.match(REGEX);
 		if (match) {
 			this.state = JSON.parse(decodeURIComponent(escape(atob(match[2]))));
@@ -74,27 +93,16 @@ function GameState(data) {
 		return {"hidden": isHidden, "content": content};
 	}
 
-	this.init();
-}
-
-function shuffle(data) {
-	for (var i = data.length - 1; i > 0; i--) {
-		var j = Math.floor(Math.random() * i);
-		var temp = data[i];
-		data[i] = data[j]
-		data[j] = temp;
-	}
-	return data;
+	this.__init__();
 }
 
 $(document).ready(function() {
+	var bingoGrid = new BingoGrid();
 	$.getJSON("data.json", function(data) {
-		var gameState = new GameState(shuffle(data));
-		new BingoGrid(gameState);
-	});
-
-	$("#button").click(function() {
-		document.cookie = "state=";
-		location.reload();
+		bingoGrid.init(data);
+		$("#button").click(function() {
+			document.cookie = "state=";
+			bingoGrid.init(data);
+		})
 	});
 });
