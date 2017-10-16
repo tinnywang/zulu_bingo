@@ -96,8 +96,23 @@ function GameState(data) {
 	this.__init__();
 }
 
+function center() {
+		var $bingoCard = $(".bingo_card");
+		var top = Math.max(0, ($(window).height() - $bingoCard.outerHeight()) / 2);
+		var left = Math.max(0, ($(window).width() - $bingoCard.outerWidth()) / 2);
+		$bingoCard.css("position", "absolute");
+		$bingoCard.css("top", top + "px");
+		$bingoCard.css("left", left + "px");
+}
+
 $(document).ready(function() {
 	var bingoGrid = new BingoGrid();
+
+	center();
+	$(window).resize(function() {
+		center();
+	});
+
 	$.getJSON("data.json", function(data) {
 		bingoGrid.init(data);
 		$("#button").click(function() {

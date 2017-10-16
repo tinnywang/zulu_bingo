@@ -1,37 +1,29 @@
 body {
-	text-align: center;
 	background-color: #575757;
 	color: #272822;
 }
 
-.center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 
-.center > * {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
+.title {
+	margin-bottom: -30px;
 }
 
 #bingo {
 	font-family: "Luckiest Guy", cursive;
-	font-size: 150px;
+	font-size: 135px;
 	color: #E74C3C;
 	text-align: center;
 }
 
 #zulu_crew {
 	font-family: "Pacifico", cursive;
-	font-size: 45px;
+	font-size: 40px;
 	color: #F0F7FF;
 	position: relative;
-	top: -55px;
-	left: 160px;
+	top: -48px;
+	left: 145px;
 	transform: rotate(-7deg);
-	margin-bottom: -35px;
+	display: inline-block;
 }
 
 #button {
@@ -42,7 +34,7 @@ body {
 	font-size: 30px;
 	border-radius: 10px;
 	padding: 0px 15px 0px 15px;
-	margin-top: 20px;
+	margin-top: 15px;
 }
 
 #button:hover {
@@ -50,16 +42,17 @@ body {
 }
 
 .bingo_card {
-	border-radius: 25px;
 	display: inline-block;
-	padding: 25px;
+	border-radius: 20px;
+	padding: 20px;
 	background-color: #272822;
+	text-align: center;
+	margin: auto;
 }
 
 #grid {
 	display: table;
-	margin: auto;
-	border-spacing: 5px;
+	border-spacing: 4px;
 }
 
 .row {
@@ -69,9 +62,11 @@ body {
 .space {
 	display: table-cell;
 	position: relative;
+	width: 135px;
+	height: 135px;
+	min-width: 135px;
+	min-height: 135px;
 	vertical-align: middle;
-	width: 150px;
-	height: 150px;
 	background-color: #F0F7FF;
 }
 
@@ -85,7 +80,7 @@ body {
 .content {
 	width: 90%;
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
+	font-size: 15px;
 	text-align: center;
 	z-index: 0;
 }
