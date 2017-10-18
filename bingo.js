@@ -52,8 +52,13 @@ function BingoGrid() {
 	function onClick($space) {
 		var $chip = $(".chip", $space);
 		var isHidden = $chip.is(":hidden");
+		var row = $space.data("row");
+		var column = $space.data("column");
 		isHidden ? $chip.show() : $chip.hide();
-		this.gameState.set($space.data("row"), $space.data("column"), !isHidden, $(".content", $space).html());
+		this.gameState.set(row, column, !isHidden, $(".content", $space).html());
+		if (this.gameState.hasBingo(row, column)) {
+			alert("BINGO!");
+		}
 	}
 
 	this.__init__();
@@ -91,6 +96,46 @@ function GameState(data) {
 
 	function value(isHidden, content) {
 		return {"hidden": isHidden, "content": content};
+	}
+
+	this.hasBingo = function(selectedRow, selectedColumn) {
+		// check columns
+		var hasWon = true;
+		for (var row = 0; row < ROWS && hasWon; row++) {
+			hasWon &= !this.get(row, selectedColumn).hidden;
+		}
+		if (hasWon) {
+			return true;
+		}
+		// check rows
+		hasWon = true;
+		for (var column = 0; column < COLUMNS && hasWon; column++) {
+			hasWon &= !this.get(selectedRow, column).hidden;
+		}
+		if (hasWon) {
+			return true;
+		}
+		// check diagonal (top left to bottom right)
+		if (selectedRow == selectedColumn) {
+			hasWon = true;
+			for (var row = 0; row < ROWS && hasWon; row++) {
+				hasWon &= !this.get(row, row).hidden;
+			}
+			if (hasWon) {
+				return true;
+			}
+		}
+		// check diagonal (top right to bottom left)
+		if (ROWS - selectedRow - 1 == selectedColumn) {
+			hasWon = true;
+			for (var row = 0, column = COLUMNS - 1; row < ROWS && COLUMNS >= 0; row++, column--) {
+				hasWon &= !this.get(row, column).hidden;
+			}
+			if (hasWon) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	this.__init__();
