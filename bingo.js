@@ -1,5 +1,6 @@
 const ROWS = 5;
 const COLUMNS = 5;
+const DURATION = 500;
 
 function BingoGrid() {
 	const CHIPS = [
@@ -25,6 +26,7 @@ function BingoGrid() {
 				$row.append($space);
 			}
 		}
+		center();
 	}
 
 	this.init = function(data) {
@@ -54,10 +56,14 @@ function BingoGrid() {
 		var isHidden = $chip.is(":hidden");
 		var row = $space.data("row");
 		var column = $space.data("column");
-		isHidden ? $chip.show() : $chip.hide();
 		this.gameState.set(row, column, !isHidden, $(".content", $space).html());
+		isHidden ? $chip.show(0, $.proxy(congrats, this, row, column)) : $chip.hide();
+	}
+
+	function congrats(row, column) {
 		if (this.gameState.hasBingo(row, column)) {
-			alert("BINGO!");
+      $(".overlay").css("display", "flex");
+      $("body").addClass("no_scroll");
 		}
 	}
 
@@ -153,16 +159,16 @@ function center() {
 $(document).ready(function() {
 	var bingoGrid = new BingoGrid();
 
-	center();
-	$(window).resize(function() {
-		center();
-	});
-
 	$.getJSON("data.json", function(data) {
 		bingoGrid.init(data);
+
 		$("#button").click(function() {
 			document.cookie = "state=";
 			bingoGrid.init(data);
 		})
+	});
+
+	$(window).resize(function() {
+		center();
 	});
 });
