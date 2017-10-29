@@ -42,6 +42,22 @@ body {
 	background-color: #E3301C;
 }
 
+.pulse {
+	animation: pulse 1500ms infinite;
+}
+
+@keyframes pulse {
+	0% {
+		background-color: #E74C3C;
+	}
+	50% {
+		background-color: #E3301C;
+	}
+	100% {
+		background-color: #E74C3C;
+	}
+}
+
 .bingo_card {
 	display: inline-flex;
 	flex-direction: column;
@@ -53,7 +69,13 @@ body {
 	background-color: #272822;
 }
 
-#grid {
+.wrapper {
+	width: 100%;
+	padding-bottom: 100%;
+	position: relative;
+}
+
+.wrapper > * {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -61,10 +83,19 @@ body {
 	left: 0;
 }
 
-.wrapper {
-	width: 100%;
-	padding-bottom: 100%;
-	position: relative;
+.overlay {
+	background: rgba(240, 247, 255, 0.8);
+	z-index: 999;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+.congrats {
+	font-family: "Pacifico", cursive;
+	font-size: 70px;
+	color: #E74C3C;
+	text-align: center;
 }
 
 .row {
