@@ -1,111 +1,111 @@
 body {
-  background-color: #575757;
-  color: #272822;
+	background-color: #575757;
+	color: #272822;
 }
 
 .title {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: -22px;
-  text-align: center;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: -22px;
+	text-align: center;
 }
 
 #bingo {
-  font-family: "Luckiest Guy", cursive;
-  font-size: 135px;
-  color: #E74C3C;
+	font-family: "Luckiest Guy", cursive;
+	font-size: 135px;
+	color: #E74C3C;
 }
 
 #zulu_crew {
-  font-family: "Pacifico", cursive;
-  font-size: 40px;
-  color: #F0F7FF;
-  position: relative;
-  top: -48px;
-  left: 145px;
-  transform: rotate(-7deg);
-  display: inline-block;
+	font-family: "Pacifico", cursive;
+	font-size: 40px;
+	color: #F0F7FF;
+	position: relative;
+	top: -48px;
+	left: 145px;
+	transform: rotate(-7deg);
+	display: inline-block;
 }
 
 #button {
-  width: 20%;
-  background-color: #E74C3C;
-  color: #F0F7FF;
-  font-family: "Pacifico", cursive;
-  font-size: 30px;
-  text-align: center;
-  border-radius: 10px;
-  margin-top: 20px;
+	width: 20%;
+	background-color: #E74C3C;
+	color: #F0F7FF;
+	font-family: "Pacifico", cursive;
+	font-size: 30px;
+	text-align: center;
+	border-radius: 10px;
+	margin-top: 20px;
 }
 
 #button:hover {
-  background-color: #E3301C;
+	background-color: #E3301C;
 }
 
 .bingo_card {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 22px;
-  padding: 22px;
-  width: 700px;
-  background-color: #272822;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 22px;
+	padding: 22px;
+	width: 700px;
+	background-color: #272822;
 }
 
 #grid {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .wrapper {
-  width: 100%;
-  padding-bottom: 100%;
-  position: relative;
+	width: 100%;
+	padding-bottom: 100%;
+	position: relative;
 }
 
 .row {
-  display: flex;
-  flex-direction: row;
-  height: 20%;
+	display: flex;
+	flex-direction: row;
+	height: 20%;
 }
 
 .space {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  flex: 1;
-  overflow: hidden;
-  border: 2px solid #272822;
-  background-color: #F0F7FF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	flex: 1;
+	overflow: hidden;
+	border: 2px solid #272822;
+	background-color: #F0F7FF;
 }
 
 .content {
-  width: 90%;
-  font-family: 'Roboto', sans-serif;
-  font-size: 15px;
-  text-align: center;
-  z-index: 0;
+	width: 90%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
+	text-align: center;
+	z-index: 0;
 }
 
 .content img {
-  width: 48px;
-  height: 48px;
+	width: 48px;
+	height: 48px;
 }
 
 .chip {
-  width: 120px;
-  height: 120px;
-  z-index: 1;
-  background-size: 100% 100%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -60px 0px 0px -60px;
+	width: 120px;
+	height: 120px;
+	z-index: 1;
+	background-size: 100% 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -60px 0px 0px -60px;
 }
 
 .shake {
@@ -154,17 +154,17 @@ body {
 }
 
 .awesome_face {
-  background-image: url("images/awesome_face.png");
+	background-image: url("images/awesome_face.png");
 }
 
 .doge {
-  background-image: url("images/doge.png");
+	background-image: url("images/doge.png");
 }
 
 .ernest {
-  background-image: url("images/ernest.png");
+	background-image: url("images/ernest.png");
 }
 
 .ernest_2 {
-  background-image: url("images/ernest_2.png");
+	background-image: url("images/ernest_2.png");
 }
