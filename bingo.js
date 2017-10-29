@@ -56,10 +56,10 @@ function BingoGrid() {
 		var row = $space.data("row");
 		var column = $space.data("column");
 		this.gameState.set(row, column, !isHidden, $(".content", $space).html());
-		isHidden ? $chip.show(0, $.proxy(congrats, this, row, column)) : $chip.hide();
+		isHidden ? $chip.show(0, $.proxy(victory, this, row, column)) : $chip.hide();
 	}
 
-	function congrats(row, column) {
+	function victory(row, column) {
 		if (this.gameState.hasBingo(row, column)) {
 			window.setTimeout(function() {
 	      $("#bingo").addClass("shake");
