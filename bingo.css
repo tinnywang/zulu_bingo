@@ -108,28 +108,49 @@ body {
   margin: -60px 0px 0px -60px;
 }
 
-.overlay {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(39, 40, 34, 0.8);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
+.shake {
+	animation: shake 100ms infinite;
 }
 
-#congrats {
-  text-align: center;
-  color: #E74C3C;
-  font-family: "Pacifico", cursive;
-  font-size: 100px;
-}
-
-.no_scroll {
-  overflow: hidden;
+@keyframes shake {
+	0% {
+		transform: translate3d(-5px, 0, 0);
+	}
+	10% {
+		transform: translate3d(0px, 5px, 0);
+		transform: rotate(5deg);
+	}
+	20% {
+		transform: translate3d(-5px, -7px, 0);
+	}
+	30% {
+		transform: rotate(-2deg);
+		transform: translate3d(7px, 0px, 0);
+	}
+	40% {
+		transform: rotate(5deg);
+	}
+	50% {
+		transform: translate3d(0px, -5px, 0);
+	}
+	60% {
+		transform: translate3d(-5px, 5px, 0);
+	}
+	70% {
+		transform: translate3d(5px, 7px, 0);
+		transform: rotate(-5deg);
+	}
+	80% {
+		transform: translate3d(5px, -5px, 0);
+		transform: rotate(5deg);
+	}
+	90% {
+		transform: translate3d(-7px, 0px, 0);
+	}
+	100% {
+		transform: translate3d(5px, -7px, 0);
+		transform: rotate(-5deg);
+	}
 }
 
 .awesome_face {

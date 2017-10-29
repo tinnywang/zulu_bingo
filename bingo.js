@@ -1,6 +1,5 @@
 const ROWS = 5;
 const COLUMNS = 5;
-const DURATION = 500;
 
 function BingoGrid() {
 	const CHIPS = [
@@ -62,8 +61,10 @@ function BingoGrid() {
 
 	function congrats(row, column) {
 		if (this.gameState.hasBingo(row, column)) {
-      $(".overlay").css("display", "flex");
-      $("body").addClass("no_scroll");
+			window.setTimeout(function() {
+	      $("#bingo").addClass("shake");
+	      $("audio")[0].play();
+	    }, 500);
 		}
 	}
 
@@ -158,6 +159,7 @@ function center() {
 
 $(document).ready(function() {
 	var bingoGrid = new BingoGrid();
+	var audio = $("audio")[0];
 
 	$.getJSON("data.json", function(data) {
 		bingoGrid.init(data);
@@ -165,7 +167,14 @@ $(document).ready(function() {
 		$("#button").click(function() {
 			document.cookie = "state=";
 			bingoGrid.init(data);
+			audio.pause();
+			audio.currentTime = 0;
+			$("#bingo").removeClass("shake");
 		})
+	});
+
+	audio.addEventListener("ended", function() {
+		$("#bingo").removeClass("shake");
 	});
 
 	$(window).resize(function() {
