@@ -65,12 +65,12 @@ function BingoGrid() {
 			document.cookie = "state=";
 			$(".overlay").fadeIn(DURATION, function() {
 				$(this).css("display", "flex");
-	      $("#button").addClass("pulse");
-	      $("#bingo").addClass("shake");
-	      $(".congrats").show();
-	      $(".congrats").fadeIn(DURATION);
-	      $("audio")[0].play();
-	    });
+				$("#button").addClass("pulse");
+				$("#bingo").addClass("shake");
+				$(".congrats").show();
+				$(".congrats").fadeIn(DURATION);
+				$("audio")[0].play();
+			});
 		}
 	}
 
@@ -155,12 +155,12 @@ function GameState(data) {
 }
 
 function center() {
-		var $bingoCard = $(".bingo_card");
-		var top = Math.max(0, ($(window).height() - $bingoCard.outerHeight()) / 2);
-		var left = Math.max(0, ($(window).width() - $bingoCard.outerWidth()) / 2);
-		$bingoCard.css("position", "absolute");
-		$bingoCard.css("top", top + "px");
-		$bingoCard.css("left", left + "px");
+	var $bingoCard = $(".bingo_card");
+	var top = Math.max(0, ($(window).height() - $bingoCard.outerHeight()) / 2);
+	var left = Math.max(0, ($(window).width() - $bingoCard.outerWidth()) / 2);
+	$bingoCard.css("position", "absolute");
+	$bingoCard.css("top", top + "px");
+	$bingoCard.css("left", left + "px");
 }
 
 $(document).ready(function() {
