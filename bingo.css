@@ -40,6 +40,7 @@ body {
 
 #button:hover {
 	background-color: #E3301C;
+	cursor: pointer;
 }
 
 .pulse {
@@ -113,6 +114,11 @@ body {
 	overflow: hidden;
 	border: 2px solid #272822;
 	background-color: #F0F7FF;
+	cursor: pointer;
+}
+
+.space:hover {
+	font-weight: bold;
 }
 
 .content {
