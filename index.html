@@ -10,9 +10,7 @@
         <script type="text/javascript" src="bingo.js"></script>
     </head>
     <body>
-        <audio>
-            <source src="music/FF7_Victory.ogx" type="audio/ogg">
-        </audio>
+        <audio src="music/FF7_Victory.ogx" type="audio/ogg"></audio>
         <div class="bingo_card">
             <div class="title">
               <div id="bingo">BINGO!</div>
@@ -20,6 +18,9 @@
             </div>
             <div class="wrapper">
               <div id="grid"></div>
+              <div class="overlay">
+                  <div class="congrats" hidden>Congratulations,</br>you did it!</div>
+              </div>
             </div>
             <div id="button">Reroll!</div>
         </div>

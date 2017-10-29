@@ -1,5 +1,6 @@
 const ROWS = 5;
 const COLUMNS = 5;
+const DURATION = 500;
 
 function BingoGrid() {
 	const CHIPS = [
@@ -61,10 +62,15 @@ function BingoGrid() {
 
 	function victory(row, column) {
 		if (this.gameState.hasBingo(row, column)) {
-			window.setTimeout(function() {
-	      $("#bingo").addClass("shake");
-	      $("audio")[0].play();
-	    }, 500);
+			document.cookie = "state=";
+			$(".overlay").fadeIn(DURATION, function() {
+				$(this).css("display", "flex");
+				$("#button").addClass("pulse");
+				$("#bingo").addClass("shake");
+				$(".congrats").show();
+				$(".congrats").fadeIn(DURATION);
+				$("audio")[0].play();
+			});
 		}
 	}
 
@@ -149,12 +155,12 @@ function GameState(data) {
 }
 
 function center() {
-		var $bingoCard = $(".bingo_card");
-		var top = Math.max(0, ($(window).height() - $bingoCard.outerHeight()) / 2);
-		var left = Math.max(0, ($(window).width() - $bingoCard.outerWidth()) / 2);
-		$bingoCard.css("position", "absolute");
-		$bingoCard.css("top", top + "px");
-		$bingoCard.css("left", left + "px");
+	var $bingoCard = $(".bingo_card");
+	var top = Math.max(0, ($(window).height() - $bingoCard.outerHeight()) / 2);
+	var left = Math.max(0, ($(window).width() - $bingoCard.outerWidth()) / 2);
+	$bingoCard.css("position", "absolute");
+	$bingoCard.css("top", top + "px");
+	$bingoCard.css("left", left + "px");
 }
 
 $(document).ready(function() {
@@ -169,7 +175,10 @@ $(document).ready(function() {
 			bingoGrid.init(data);
 			audio.pause();
 			audio.currentTime = 0;
+			$(this).removeClass("pulse");
 			$("#bingo").removeClass("shake");
+			$(".congrats").hide();
+			$(".overlay").fadeOut(DURATION);
 		})
 	});
 
